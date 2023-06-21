@@ -1,8 +1,12 @@
+import { NavBar } from '@/components';
 import '@/styles/globals.css';
 
 export const metadata = {
   title: 'Prompthat',
   description: 'Find and Share The Best AI Prompts',
+  icons: {
+    icon: '/icons/favicon.png'
+  }
 };
 
 interface Props  {
@@ -17,6 +21,7 @@ export default function RootLayout ({ children }: Props) {
           <div className="gradient"></div>
         </section>
         <main className="app">
+          <NavBar />
           {children}
         </main>
       </body>
