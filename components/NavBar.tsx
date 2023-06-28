@@ -6,12 +6,13 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
-import { signIn, signOut, getProviders } from 'next-auth/react';
+import { signIn, signOut, getProviders, useSession } from 'next-auth/react';
+
 
 export function NavBar () {
   const [providers, setProviders] = useState<any>({});
   const [toggleMenu, setToggleMenu] = useState(false);
-  const user = true;
+  const { data: session } = useSession();
   
   useEffect(() => {
     getProviders()
@@ -35,7 +36,7 @@ export function NavBar () {
       </Link>
       <div className="sm:flex hidden">
         {
-          user
+          session?.user
             ? (
               <div className="flex gap-3 md:gap-5">
                 <Link href="/create-prompt" className="black_btn">
@@ -50,7 +51,8 @@ export function NavBar () {
                 </button>
                 <Link href="/profile">
                   <Image
-                    src="/images/logo.svg"
+                    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                    src={session.user.image!}
                     alt="Profile"
                     width={35}
                     height={35}
@@ -79,11 +81,12 @@ export function NavBar () {
       </div>
       <div className="sm:hidden flex relative">
         {
-          user
+          session?.user
             ? (
               <div className="flex">
                 <Image
-                  src="/images/logo.svg"
+                  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                  src={session.user.image!}
                   alt="Profile"
                   width={35}
                   height={35}
