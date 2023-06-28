@@ -1,4 +1,4 @@
-import { NavBar } from '@/components';
+import { NavBar, Provider } from '@/components';
 import '@/styles/globals.css';
 
 export const metadata = {
@@ -17,13 +17,15 @@ export default function RootLayout ({ children }: Props) {
   return (
     <html lang="en">
       <body>
-        <section className="main">
-          <div className="gradient"></div>
-        </section>
-        <main className="app">
-          <NavBar />
-          {children}
-        </main>
+        <Provider>
+          <section className="main">
+            <div className="gradient"></div>
+          </section>
+          <main className="app">
+            <NavBar />
+            {children}
+          </main>
+        </Provider>
       </body>
     </html>
   );
