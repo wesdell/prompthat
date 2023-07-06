@@ -1,3 +1,5 @@
+import { NextResponse } from 'next/server';
+
 import { db } from '@/database';
 import { Prompt } from '@/models';
 
@@ -5,7 +7,7 @@ export async function POST (req: Request) {
   const { userId, prompt = '', tag = '' } = await req.json();
 
   if (!prompt || !tag) {
-    return new Response('Failed to create prompt. Missing fields.', { status: 400 });
+    return NextResponse.json('Bad request.', { status: 400 });
   }
   
   try {
@@ -17,9 +19,9 @@ export async function POST (req: Request) {
     });
     await newPrompt.save();
 
-    return new Response(newPrompt, { status: 201 });
+    return NextResponse.json(newPrompt, { status: 201 });
   } catch (error) {
     console.error(error);
-    return new Response('Failed to create prompt. Review server logs.',{ status: 500 });
+    return NextResponse.json('Something went wrong.', { status: 500 });
   }
 }

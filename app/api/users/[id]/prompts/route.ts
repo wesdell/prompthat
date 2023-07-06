@@ -13,9 +13,9 @@ export async function GET (request: Request, { params }: Params) {
   try {
     await db.connectToDB();
     const prompts = await Prompt.find({ creator: params.id }).populate('creator');
-    return NextResponse.json(prompts);
+    return NextResponse.json(prompts, { status: 200 });
   } catch (error) {
     console.error(error);
-    return NextResponse.json([]);
+    return NextResponse.json('Something went wrong.', { status: 500 });
   }
 }
