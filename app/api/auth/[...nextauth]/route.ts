@@ -17,7 +17,11 @@ const handler = NextAuth ({
       return session;
     },
     async signIn ({ profile }) {
-      return await dbUser.createUser({ username: profile?.name?.replace(' ', '').toLowerCase(), email: profile?.email, image: profile?.image });
+      return await dbUser.createUser({
+        username: profile?.name?.replace(' ', '').toLowerCase(),
+        email: profile?.email,
+        image: profile?.picture
+      });
     }
   }
 });
