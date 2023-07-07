@@ -33,6 +33,11 @@ export const findUser = async ({ email }: ISearchUser): Promise<string | undefin
   try {
     await db.connectToDB();
     const user = await User.findOne({ email });
+
+    if (!user) {
+      return undefined;
+    }
+    
     return user._id;
   } catch (error) {
     console.error(error);
