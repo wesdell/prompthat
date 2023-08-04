@@ -1,4 +1,6 @@
-import { Schema, model, models } from 'mongoose';
+import { type Model, Schema, model, models } from 'mongoose';
+
+import type { ICreator } from '@/interfaces';
 
 const userSchema = new Schema({
   email: {
@@ -16,4 +18,4 @@ const userSchema = new Schema({
   }
 });
 
-export const User = models.User || model('User', userSchema);
+export const User: Model<ICreator> = models.User || model('User', userSchema);
