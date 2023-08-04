@@ -8,7 +8,7 @@ export const usePrompts = () => {
   const [prompts, setPrompts] = useState<IPrompt[]>([]);
 
   useEffect(() => {
-    fetch('/api/prompt')
+    window.fetch('/api/prompt')
       .then((response) => {
         if (!response.ok) {
           throw new Error(`Error HTTP: ${response.status}`);
