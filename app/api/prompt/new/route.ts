@@ -7,7 +7,7 @@ export async function POST (req: Request) {
   const { userId, prompt = '', tag = '' } = await req.json();
 
   if (!prompt || !tag) {
-    return NextResponse.json('Bad request.', { status: 400 });
+    return NextResponse.json('All fields are required.', { status: 400 });
   }
   
   try {
